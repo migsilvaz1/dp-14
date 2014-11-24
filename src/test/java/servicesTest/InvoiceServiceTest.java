@@ -29,18 +29,14 @@ public class InvoiceServiceTest extends AbstractTest{
 		Invoice inv = invS.create();
 		inv.setDescription("This is invoice 5");
 		inv.setTotalCost(1.0);
-		inv.setContract(contractService.findOneToEdit(43));
-		Invoice res= invS.save(inv);
+		inv.setContract(contractService.findOne(45));
+		invS.save(inv);
 	}
 	@Test
 	public void testDelete(){
 		authenticate("supplier1");
-		Invoice inv = invS.create();
-		inv.setDescription("This is invoice 5");
-		inv.setTotalCost(1.0);
-		inv.setContract(contractService.findOneToEdit(43));
-		Invoice res= invS.save(inv);
-		invS.delete(inv);
+		Invoice i = invS.findOne(52);
+		invS.delete(i);
 	}
 	@Test
 	public void testFindAll(){

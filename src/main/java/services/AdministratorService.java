@@ -5,13 +5,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
- 
+
 import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
@@ -51,7 +51,7 @@ public class AdministratorService {
     	return a;
     }
     
-    public Administrator save(Administrator s){
+    public void save(Administrator s){
     	
     	if(s.getId()==0){
 			Authority a = new Authority();
@@ -66,7 +66,17 @@ public class AdministratorService {
 			Assert.isTrue(saux.getUserAccount().equals(s.getUserAccount()));
 		}
     	
-    	return administratorRepository.save(s);
+    	Administrator a = administratorRepository.save(s);
+    	Folder inbox = new Folder();
+		inbox.setActor(a);
+		inbox.setErasable(false);
+		inbox.setName("inbox");
+		Folder outbox = new Folder();
+		outbox.setActor(a);
+		outbox.setErasable(false);
+		outbox.setName("outbox");
+		folderService.saveAux(inbox);
+		folderService.saveAux(outbox);
     }
     
     //

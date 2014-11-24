@@ -14,6 +14,7 @@ import repositories.SupplierRepository;
 import security.Authority;
 import security.LoginService;
 import domain.Assessment;
+import domain.Folder;
 import domain.Supplier;
 
 @Service
@@ -35,7 +36,7 @@ public class SupplierService {
 		return supplier;
 	}
 	
-	public Supplier save(Supplier s){
+	public void save(Supplier s){
 		if(s.getId()==0){
 			Authority a = new Authority();
 			a.setAuthority(Authority.SUPPLIER);
@@ -49,7 +50,17 @@ public class SupplierService {
 			Assert.isTrue(saux.getUserAccount().equals(s.getUserAccount()));
 			
 		}
-		return supplierRepository.save(s);
+		Supplier a = supplierRepository.save(s);
+		Folder inbox = new Folder();
+		inbox.setActor(a);
+		inbox.setErasable(false);
+		inbox.setName("inbox");
+		Folder outbox = new Folder();
+		outbox.setActor(a);
+		outbox.setErasable(false);
+		outbox.setName("outbox");
+		folderService.saveAux(inbox);
+		folderService.saveAux(outbox);
 	}
 	
 	public Collection<Supplier> findAll(){

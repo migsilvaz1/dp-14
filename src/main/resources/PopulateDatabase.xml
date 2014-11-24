@@ -260,6 +260,7 @@
 			<list>
 				<ref bean="folder1" />
 				<ref bean="folder2" />
+				<ref bean="folder17" />
 			</list>
 		</property>
 	</bean>
@@ -394,6 +395,7 @@
 			<list>
 				<ref bean="request1"/>
 				<ref bean="request2"/>
+				<ref bean="request3"/>
 			</list>
 		</property>
 	</bean>
@@ -450,7 +452,19 @@
 			</list>
 		</property>
 	</bean>
-	
+	<bean id="request3" class="domain.Request">
+		<property name="code" value="987591ggt"/>
+		<property name="description" value="This is request 3."/>
+		<property name="requestedStart" value="2016/11/11"/>
+		<property name="requestedEnd" value="2017/05/05"/>
+		<property name="consumer" ref ="consumer1" />
+		<property name="item" ref ="item1" />
+		<property name="contracts">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
 	
 	<!-- Contract  -->
 	
@@ -781,6 +795,20 @@
 		<property name="name" value="outbox"/>
 		<property name="erasable" value="false"/>
 		<property name="actor" ref="supplier2" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="children">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder17" class="domain.Folder">
+		<property name="name" value="example"/>
+		<property name="erasable" value="true"/>
+		<property name="actor" ref="admin1" />
 		<property name="messages">
 			<list>
 			</list>

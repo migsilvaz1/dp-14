@@ -36,7 +36,7 @@ public class ConsumerService {
 		return consumer;
 	}
 	
-	public Consumer save(Consumer s){
+	public void save(Consumer s){
 		if(s.getId()==0){
 			Authority a = new Authority();
 			a.setAuthority(Authority.CONSUMER);
@@ -50,7 +50,17 @@ public class ConsumerService {
 			Assert.isTrue(saux.getUserAccount().equals(s.getUserAccount()));
 			
 		}
-		return consumerRepository.save(s);
+		Consumer a = consumerRepository.save(s);
+		Folder inbox = new Folder();
+		inbox.setActor(a);
+		inbox.setErasable(false);
+		inbox.setName("inbox");
+		Folder outbox = new Folder();
+		outbox.setActor(a);
+		outbox.setErasable(false);
+		outbox.setName("outbox");
+		folderService.saveAux(inbox);
+		folderService.saveAux(outbox);
 	}
 	
 	public Collection<Consumer> findAll(){
