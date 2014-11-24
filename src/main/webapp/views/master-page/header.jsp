@@ -81,13 +81,16 @@
 					<li class="arrow"></li>
 					<li><a href=""><spring:message code="master.page.profile.messages" /></a></li>
 					<li><a href=""><spring:message code="master.page.profile.search.item.keyword" /></a></li>
-				<security:authorize access="hasRole('CONSUMER', 'SUPPLIER')">
+				<security:authorize access="hasRole('CONSUMER')">
+					<li><a href=""><spring:message code="master.page.consumer.assessments" /></a></li>
+					<li><a href=""><spring:message code="master.page.consumer.curriculum" /></a></li>
+				</security:authorize>
+				<security:authorize access="hasRole('SUPPLIER')">
 					<li><a href=""><spring:message code="master.page.consumer.assessments" /></a></li>
 					<li><a href=""><spring:message code="master.page.consumer.curriculum" /></a></li>
 				</security:authorize>
 				<security:authorize access="hasRole('ADMIN')">
-					<li><a href=""><spring:message code="master.page.broadcast.create.curriculum" /></a></li>
-					<li><a href=""><spring:message code="master.page.broadcast.update.curriculum" /></a></li>
+					<li><a href=""><spring:message code="master.page.broadcast.create.broadcast" /></a></li>
 				</security:authorize>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
