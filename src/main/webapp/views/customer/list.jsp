@@ -19,21 +19,21 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="actor" id="row" pagesize="5" class="displaytag" 
+<display:table name="actors" id="row" pagesize="5" class="displaytag" 
 				requestURI="${requestURI}" >
 	
 	<spring:message code="actor.name" var="name" />
-		<display:column property="customer.name" title="${name}" sortable="true" />
+		<display:column property="actor.name" title="${name}" sortable="true" />
 		
 	<spring:message code="actor.surname" var="surname" />
-		<display:column property="worker.surname" title="${surname}" sortable="true" />
+		<display:column property="actor.surname" title="${surname}" sortable="true" />
 	
 	<display:column>
 			<a href="profile/consumer/curriculum/edit.do?userAccountId=${row.id}">
 				<spring:message	code="curriculum.edit" />
 			</a>
 	</display:column>
-	
+	<jstl:if test="${actor.userAccount.authorities[0]=='SUPPLIER'}">
 	<security:authorize access="hasRole('CONSUMER')">
 		<display:column>
 			<a href="item/list.do?supplierId=${row.id}">
@@ -49,5 +49,5 @@
 			</a>
 		</display:column>
 	</security:authorize>
-	
+	</jstl:if>
 </display:table>
