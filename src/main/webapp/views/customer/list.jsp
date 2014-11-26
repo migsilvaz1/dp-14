@@ -33,7 +33,7 @@
 				<spring:message	code="curriculum.edit" />
 			</a>
 	</display:column>
-	<jstl:if test="${actor.userAccount.authorities[0]=='SUPPLIER'}">
+	<jstl:if test="${userAccount.authorities[0]=='SUPPLIER'}">
 	<security:authorize access="hasRole('CONSUMER')">
 		<display:column>
 			<a href="item/list.do?supplierId=${row.id}">
