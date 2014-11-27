@@ -22,7 +22,6 @@ import domain.Consumer;
 import domain.Contract;
 import domain.CreditCard;
 import domain.Customer;
-import domain.Folder;
 import domain.Supplier;
  
 @Service
@@ -137,15 +136,28 @@ public class AdministratorService {
         return administratorRepository.supplierMostEarned();
     }
  
-    public Collection<Double> auditorStatistics() {
-        Collection<Double> stats = administratorRepository.auditorStatistics();
-        return stats;
+    public Map<String,List<Double>> auditorStatistics() {
+    	Map<String,List<Double>> map = new HashMap<String,List<Double>>(); 
+        for (Object[] array: administratorRepository.auditorStatistics()){
+        	List<Double> caux = new ArrayList<Double>();
+        	caux.add((Double) array[1]);
+        	caux.add((Double) array[2]);
+        	caux.add((Double) array[3]);
+        	map.put((String) array[0], caux);
+        }
+        return map;
     }
  
-    public Collection<Double> incidencesStatistics() {
-        Collection<Double> stats = administratorRepository
-                .incidencesStatistics();
-        return stats;
+    public Map<String,List<Double>> incidencesStatistics() {
+    	Map<String,List<Double>> map = new HashMap<String,List<Double>>(); 
+        for (Object[] array: administratorRepository.incidencesStatistics()){
+        	List<Double> caux = new ArrayList<Double>();
+        	caux.add((Double) array[1]);
+        	caux.add((Double) array[2]);
+        	caux.add((Double) array[3]);
+        	map.put((String) array[0], caux);
+        }
+        return map;
     }
  
     public Collection<Auditor> auditorMostAudited() {

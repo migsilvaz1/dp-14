@@ -77,13 +77,13 @@ public interface AdministratorRepository extends
 
 	// 13 The minimum, the maximum, and the average number of contracts audited
 	// by every auditor.
-	@Query("select min(a.auditionRecords.size),max(a.auditionRecords.size),avg(a.auditionRecords.size) from Auditor a")
-	Collection<Double> auditorStatistics();
+	@Query("select a.name, min(a.auditionRecords.size),max(a.auditionRecords.size),avg(a.auditionRecords.size) from Auditor a")
+	Collection<Object[]> auditorStatistics();
 
 	// 14 The minimum, the maximum, and the average number of incidences per
 	// audit record.
-	@Query("select min(ar.numberIncidences),max(ar.numberIncidences),avg(ar.numberIncidences) from AuditionRecord ar")
-	Collection<Double> incidencesStatistics();
+	@Query("select ar.name, min(ar.numberIncidences),max(ar.numberIncidences),avg(ar.numberIncidences) from AuditionRecord ar")
+	Collection<Object[]> incidencesStatistics();
 
 	// 15 The auditor/s who has/have audited more contracts.
 	@Query("select a from Auditor a where a.auditionRecords.size=(select max(a.auditionRecords.size) from Auditor a)")
