@@ -75,10 +75,6 @@ public class MessageServiceTest extends AbstractTest{
 	@Test
 	public void testMoveMessage(){
 		authenticate("admin1");
-		//Collection<Folder> colFrom = adminS.findByPrincipal().getFolders();
-		//Collection<Folder> colTo = supS.findSupplierByUAId(8).getFolders();
-		//Folder fFrom = (Folder) colFrom.toArray()[0];
-		//Folder fTo = (Folder) colTo.toArray()[0];
 		List<Folder> listFrom = new ArrayList<Folder>(adminS.findByPrincipal().getFolders());
 		Folder fFrom = (Folder) listFrom.get(0);
 		Folder fTo = (Folder) listFrom.get(1);

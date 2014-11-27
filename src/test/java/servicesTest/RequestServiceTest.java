@@ -1,17 +1,18 @@
 package servicesTest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.ConsumerService;
+import services.ItemService;
 import services.RequestService;
 import utilities.AbstractTest;
 import domain.Consumer;
-import domain.Item;
 import domain.Request;
 
 @Transactional(noRollbackFor = Exception.class)
@@ -23,52 +24,35 @@ public class RequestServiceTest extends AbstractTest {
 
 	@Autowired
 	private ConsumerService consumerService;
+	
+	@Autowired
+	private ItemService itemService;
 
 	// Test
 	@Test
 	public void checkCreate() {
 		authenticate("consumer1");
-		Request req;
-
-		req = requestService.create();
-		req.setCode("123-456");
-		req.setDescription("description 1");
-
-		Item item = new Item();
-		req.setItem(item);
-
-		Consumer c = new Consumer();
-		req.setConsumer(c);
-		System.out.println(req);
+		requestService.create();
 	}
 
-	/*@Test
-	public void checkSave() {
+	public void checkSave() throws ParseException {
 
 		authenticate("consumer1");
 		Request req = requestService.create();
+		req.setItem(itemService.findOne(14));
 		req.setCode("123-456");
 		req.setDescription("description 2");
-		req.setRequestedStart(new Date());
-		req.setRequestedEnd(new Date());
+		req.setRequestedStart(new SimpleDateFormat("dd/MM/yyyy").parse("25/04/2013"));
+		req.setRequestedEnd(new SimpleDateFormat("dd/MM/yyyy").parse("25/04/2015"));
 		requestService.save(req);
-		System.out.println(req.getId());
-		System.out.println("Save");
 
 	}
 
 	@Test
 	public void checkDelete() {
 		authenticate("consumer1");
-		Request req = requestService.create();
-		req.setCode("123-456");
-		req.setDescription("description 3");
-		req.setId(1212);
-		requestService.save(req);
-		System.out.println(req.getId() + " this is the id");
-		requestService.delete(req);
-		System.out.println("Deleted");
-	}*/
+		requestService.delete(requestService.findOne(44));
+	}
 
 	@Test
 	public void findAllTest() {

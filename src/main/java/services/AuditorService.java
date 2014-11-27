@@ -49,7 +49,19 @@ public class AuditorService {
 			Assert.isTrue(saux.getUserAccount().equals(s.getUserAccount()));
 			
 		}
-		auditorRepository.save(s);
+		Auditor a = auditorRepository.save(s);
+		
+		Folder inbox = new Folder();
+		inbox.setActor(a);
+		inbox.setErasable(false);
+		inbox.setName("inbox");
+		Folder outbox = new Folder();
+		outbox.setActor(a);
+		outbox.setErasable(false);
+		outbox.setName("outbox");
+		folderService.saveAux(inbox);
+		folderService.saveAux(outbox);
+		
 	}
 	
 	public Auditor findByPrincipal(){

@@ -1,36 +1,24 @@
 package servicesTest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Contract;
-import domain.Item;
-import domain.Request;
-import domain.Supplier;
-
-import services.ConsumerService;
 import services.ContractService;
-import services.ItemService;
 import services.RequestService;
 import services.SupplierService;
 import utilities.AbstractTest;
+import domain.Contract;
 @Transactional(noRollbackFor = Exception.class)
 public class ContractServiceTest extends AbstractTest{
 	@Autowired
 	private ContractService contractS;
 	@Autowired
 	private SupplierService supS;
-	@Autowired
-	private ConsumerService conS;
-	@Autowired
-	private ItemService iteS;
 	@Autowired
 	private RequestService requestService;
 	
@@ -39,15 +27,52 @@ public class ContractServiceTest extends AbstractTest{
 		Contract c = contractS.create();
 		Assert.isTrue(c.getId()==0);
 	}
-	/*@Test
-	public void testSave(){
+	
+	@Test
+	public void testSave() throws ParseException{
 		authenticate("admin1");
 		Contract cont = contractS.create();
 		cont.setDescription("This is contract 5");
 		cont.setContractor(supS.findSupplierByUAId(9));
 		cont.setRequest(requestService.findOne(42));
-		
+		cont.setStartDate(new SimpleDateFormat("dd/MM/yyyy").parse("25/04/2013"));
+		cont.setEndDate(new SimpleDateFormat("dd/MM/yyyy").parse("25/04/2015"));
 		contractS.save(cont);
+		
+	}
+	@Test
+	public void testFindOne() {
+		Assert.isTrue(contractS.findOne(45)!=null);
+	}
+	@Test
+	public void testContractsByConsumerUAId() {
+		authenticate("consumer1");
+		contractS.contractsByConsumerUAId();
+	}
+
+	@Test
+	public void testContractsNotSignedByConsumerUAId() {
+		authenticate("consumer1");
+		contractS.contractsNotSignedByConsumerUAId();
+	}
+
+	/*public void contractsBySupplierUAId() {
+		
+	}
+
+	public void contractsNotSignedBySupplierUAId() {
+		
+	}
+
+	public void contractsCancelled() {
+		
+	}
+
+	public void contractsByAuditorUAId() {
+		
+	}
+
+	public void contractsNotAudited() {
 		
 	}*/
 }

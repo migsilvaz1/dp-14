@@ -1,6 +1,5 @@
 package servicesTest;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -10,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import services.FolderService;
 import services.SupplierService;
 import utilities.AbstractTest;
-import domain.Actor;
 import domain.Folder;
-import domain.Message;
 import domain.Supplier;
 
 @Transactional(noRollbackFor = Exception.class)
@@ -42,56 +39,18 @@ public class FolderServiceTest extends AbstractTest{
 			System.out.println("Folder id: " + f.getId());
 		}
 	}
-/*
 	@Test
 	public void checkSave() {
-
+		authenticate("consumer1");
 		Folder fol = folderService.create();
-
-		Actor actor = new Actor();
-		fol.setActor(actor);
-
-		fol.setName("folder 1");
-
-		Collection<Folder> children = new ArrayList<Folder>();
-		fol.setChildren(children);
-
-		fol.setErasable(false);
-
-		Collection<Message> messages = new ArrayList<Message>();
-		fol.setMessages(messages);
-
-		Folder parent = new Folder();
-		fol.setParent(parent);
-
+		fol.setName("example");
 		folderService.save(fol);
-		System.out.println(fol.getId());
-		System.out.println("Save");
 	}
 
 	@Test
 	public void checkDelete() {
-
-		Folder fol = folderService.create();
-		fol.setName("folder 1");
-
-		Actor actor = new Actor();
-		fol.setActor(actor);
-
-		Collection<Folder> children = new ArrayList<Folder>();
-		fol.setChildren(children);
-
-		fol.setErasable(false);
-
-		Collection<Message> messages = new ArrayList<Message>();
-		fol.setMessages(messages);
-
-		Folder parent = new Folder();
-		fol.setParent(parent);
-
+		authenticate("admin1");
+		Folder fol = folderService.findOne(20);
 		folderService.delete(fol);
-		System.out.println(fol.getId());
-		System.out.println("Deleted");
 	}
-*/
 }

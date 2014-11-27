@@ -35,30 +35,19 @@ public class ItemServiceTest extends AbstractTest {
 
 	@Test
 	public void checkitemsBySupplierUAId() {
-		Collection<Item> all;
 		authenticate("supplier2");
-		// CHECK
-		all = itemService.itemsBySupplierUAId(0);
-		for (Item i : all) {
-			System.out.println(i);
-		}
+		itemService.itemsBySupplierUAId(0);
 	}
 
 	@Test
 	public void checkitemsByKeyword() {
-		Collection<Item> all;
-		authenticate("supplier2");
-		all = itemService.itemsByKeyword(".");
-		for (Item i : all) {
-			System.out.println(i);
-		}
+		itemService.itemsByKeyword(".");
 	}
 
 	@Test
 	public void checkCreate() {
 		authenticate("supplier2");
-		Item res = itemService.create();
-		System.out.println(res);
+		itemService.create();
 	}
 
 	@Test
@@ -71,22 +60,12 @@ public class ItemServiceTest extends AbstractTest {
 		res.setPrice(1.0);
 
 		itemService.save(res);
-		System.out.println(res.getId());
-		System.out.println("Save");
 
 	}
 
 	@Test
 	public void checkDelete() {
-		authenticate("supplier2");
-		Item res = itemService.create();
-		res.setName("New item");
-		res.setCode("New item code 1");
-		res.setDescription("New item description 1");
-		res.setPrice(1.0);
-		res.setId(1212);
-		itemService.save(res);
-		System.out.println(res.getId() + " this is the id");
+		Item res = itemService.findOne(14);
 		itemService.delete(res);
 		System.out.println("Deleted");
 	}

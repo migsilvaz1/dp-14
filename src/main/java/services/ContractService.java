@@ -82,7 +82,7 @@ public class ContractService {
 	
 	//
 
-	public Contract findOneToEdit(int id) {
+	public Contract findOne(int id) {
 		Contract contract = contractRepository.findOne(id);
 		return contract;
 	}

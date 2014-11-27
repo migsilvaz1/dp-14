@@ -28,7 +28,7 @@ public class AuditionRecordServiceTest extends AbstractTest{
 	@Test
 	public void testSave(){	
 		
-		Contract c = contractS.findOneToEdit(47);
+		Contract c = contractS.findOne(49);
 		authenticate("auditor1");
 		AuditionRecord ar = audRecordS.create();
 		ar.setStatement("Statement audition record 1");

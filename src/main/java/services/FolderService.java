@@ -71,6 +71,7 @@ public class FolderService {
 			} else if (auth.equals(auditor)) {
 				folder.setActor(auditorService.findByPrincipal());
 			}
+			folder.setErasable(true);
 		} else {
 			Assert.isTrue(folder.getActor().getUserAccount().getId() == uA
 					.getId());
