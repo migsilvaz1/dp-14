@@ -82,7 +82,7 @@ public interface AdministratorRepository extends
 
 	// 14 The minimum, the maximum, and the average number of incidences per
 	// audit record.
-	@Query("select ar.name, min(ar.numberIncidences),max(ar.numberIncidences),avg(ar.numberIncidences) from AuditionRecord ar")
+	@Query("select ar, min(ar.numberIncidences),max(ar.numberIncidences),avg(ar.numberIncidences) from AuditionRecord ar")
 	Collection<Object[]> incidencesStatistics();
 
 	// 15 The auditor/s who has/have audited more contracts.

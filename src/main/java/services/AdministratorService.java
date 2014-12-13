@@ -17,11 +17,13 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.AuditionRecord;
 import domain.Auditor;
 import domain.Consumer;
 import domain.Contract;
 import domain.CreditCard;
 import domain.Customer;
+import domain.Folder;
 import domain.Supplier;
  
 @Service
@@ -150,22 +152,22 @@ public class AdministratorService {
     	Map<String,List<Double>> map = new HashMap<String,List<Double>>(); 
         for (Object[] array: administratorRepository.auditorStatistics()){
         	List<Double> caux = new ArrayList<Double>();
-        	caux.add((Double) array[1]);
-        	caux.add((Double) array[2]);
+        	caux.add(1.0 * (int)array[1]);
+        	caux.add(1.0 * (int)array[2]);
         	caux.add((Double) array[3]);
         	map.put((String) array[0], caux);
         }
         return map;
     }
  
-    public Map<String,List<Double>> incidencesStatistics() {
-    	Map<String,List<Double>> map = new HashMap<String,List<Double>>(); 
+    public Map<AuditionRecord,List<Double>> incidencesStatistics() {
+    	Map<AuditionRecord,List<Double>> map = new HashMap<AuditionRecord,List<Double>>(); 
         for (Object[] array: administratorRepository.incidencesStatistics()){
         	List<Double> caux = new ArrayList<Double>();
-        	caux.add((Double) array[1]);
-        	caux.add((Double) array[2]);
+        	caux.add(1.0 * (int)array[1]);
+        	caux.add(1.0 * (int)array[2]);
         	caux.add((Double) array[3]);
-        	map.put((String) array[0], caux);
+        	map.put((AuditionRecord) array[0], caux);
         }
         return map;
     }
