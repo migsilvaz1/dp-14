@@ -20,6 +20,7 @@
 <div>
 	<ul id="jMenu">
 			<li><a class="fNiv" href=""><spring:message code="master.page.list" /></a></li>
+			<li><a class="fNiv" href="item/search.do"><spring:message code="master.page.search" /></a></li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.admin" /></a>

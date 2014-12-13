@@ -2,10 +2,11 @@ package servicesTest;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import services.AdministratorService;
 import utilities.AbstractTest;
-
+@Transactional(noRollbackFor = Exception.class)
 public class AdministratorServiceTest extends AbstractTest {
 
 	// Service under test -------------------------------------------------
